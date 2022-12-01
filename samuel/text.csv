@@ -1,0 +1,564 @@
+id,name,powerstats.intelligence
+1,A-Bomb,38
+2,Abe Sapien,88
+3,Abin Sur,50
+4,Abomination,63
+5,Abraxas,88
+6,Absorbing Man,38
+7,Adam Monroe,63
+8,Adam Strange,69
+10,Agent Bob,10
+11,Agent Zero,75
+12,Air-Walker,50
+13,Ajax,56
+14,Alan Scott,63
+15,Alex Mercer,50
+17,Alfred Pennyworth,63
+18,Alien,50
+20,Amazo,63
+23,Angel,75
+24,Angel,63
+25,Angel Dust,38
+26,Angel Salvadore,38
+28,Animal Man,56
+29,Annihilus,75
+30,Ant-Man,100
+31,Ant-Man II,75
+32,Anti-Monitor,88
+34,Anti-Venom,75
+35,Apocalypse,100
+36,Aquababy,10
+37,Aqualad,63
+38,Aquaman,81
+39,Arachne,50
+40,Archangel,63
+41,Arclight,38
+42,Ardina,63
+43,Ares,75
+44,Ariel,50
+45,Armor,50
+48,Atlas,63
+49,Atlas,63
+52,Atom Girl,38
+53,Atom II,88
+56,Aurora,63
+57,Azazel,50
+58,Azrael,63
+60,Bane,88
+61,Banshee,50
+62,Bantam,25
+63,Batgirl,88
+66,Batgirl IV,69
+68,Batgirl VI,75
+69,Batman,81
+70,Batman,100
+71,Batman II,88
+72,Battlestar,50
+73,Batwoman V,81
+75,Beast,94
+76,Beast Boy,50
+78,Ben 10,10
+79,Beta Ray Bill,63
+80,Beyonder,100
+81,Big Barda,88
+82,Big Daddy,38
+83,Big Man,75
+84,Bill Harken,63
+87,Bionic Woman,56
+88,Bird-Brain,25
+92,Bishop,63
+93,Bizarro,38
+95,Black Adam,88
+96,Black Bolt,75
+97,Black Canary,63
+98,Black Canary,63
+99,Black Cat,75
+100,Black Flash,44
+102,Black Knight III,63
+103,Black Lightning,50
+104,Black Mamba,75
+105,Black Manta,75
+106,Black Panther,88
+107,Black Widow,75
+109,Blackout,63
+110,Blackwing,38
+111,Blackwulf,50
+112,Blade,63
+114,Bling!,69
+115,Blink,50
+118,Blizzard II,38
+119,Blob,10
+120,Bloodaxe,63
+121,Bloodhawk,50
+126,Blue Beetle III,50
+127,Boba Fett,63
+130,Boom-Boom,38
+135,Box IV,50
+136,Brainiac,100
+137,Brainiac 5,100
+139,Brundlefly,69
+140,Buffy,63
+141,Bullseye,50
+142,Bumblebee,63
+144,Bushido,38
+145,Cable,88
+146,Callisto,63
+147,Cameron Hicks,50
+148,Cannonball,50
+149,Captain America,69
+150,Captain Atom,81
+151,Captain Britain,75
+152,Captain Cold,50
+154,Captain Hindsight,25
+156,Captain Marvel,88
+157,Captain Marvel,84
+158,Captain Marvel II,75
+160,Captain Planet,50
+162,Carnage,63
+165,Catwoman,69
+167,Century,88
+169,Chamber,50
+170,Chameleon,88
+171,Changeling,63
+172,Cheetah,38
+174,Cheetah III,88
+176,Chuck Norris,50
+177,Citizen Steel,50
+178,Claire Bennet,38
+180,Cloak,63
+181,Clock King,75
+185,Colossus,63
+186,Copycat,56
+188,Cottonmouth,50
+191,Crystal,63
+194,Cyborg,75
+195,Cyborg Superman,75
+196,Cyclops,75
+198,Dagger,63
+200,Daphne Powell,38
+201,Daredevil,75
+202,Darkhawk,50
+203,Darkman,75
+204,Darkseid,88
+206,Darkstar,38
+207,Darth Maul,56
+208,Darth Vader,69
+209,Dash,25
+210,Data,100
+211,Dazzler,63
+212,Deadman,50
+213,Deadpool,69
+214,Deadshot,50
+215,Deathlok,69
+216,Deathstroke,75
+217,Demogoblin,50
+218,Destroyer,50
+219,Diamondback,44
+220,DL Hawkins,50
+221,Doc Samson,75
+222,Doctor Doom,100
+224,Doctor Fate,81
+225,Doctor Octopus,94
+226,Doctor Strange,100
+227,Domino,63
+228,Donatello,88
+230,Doomsday,75
+231,Doppelganger,8
+232,Dormammu,88
+233,Dr Manhattan,88
+234,Drax the Destroyer,56
+235,Ego,88
+236,Elastigirl,63
+237,Electro,69
+238,Elektra,63
+239,Elle Bishop,50
+240,Elongated Man,75
+241,Emma Frost,75
+242,Enchantress,63
+245,Ethan Hunt,75
+246,Etrigan,50
+247,Evil Deadpool,69
+248,Evilhawk,50
+249,Exodus,63
+251,Falcon,38
+252,Fallen One II,88
+253,Faora,88
+254,Feral,38
+256,Fin Fang Foom,50
+257,Firebird,38
+258,Firelord,38
+259,Firestar,50
+260,Firestorm,50
+261,Firestorm,38
+263,Flash,63
+265,Flash II,88
+266,Flash III,63
+267,Flash IV,63
+268,Forge,63
+269,Franklin Richards,63
+270,Franklin Storm,38
+271,Frenzy,63
+273,Galactus,100
+274,Gambit,63
+275,Gamora,75
+277,Gary Bell,63
+278,General Zod,94
+280,Ghost Rider,50
+284,Giganta,81
+285,Gladiator,50
+286,Goblin Queen,75
+287,Godzilla,44
+288,Gog,50
+289,Goku,56
+294,Gorilla Grodd,81
+296,Gravity,50
+297,Greedo,38
+298,Green Arrow,81
+299,Green Goblin,100
+300,Green Goblin II,75
+303,Groot,75
+305,Guy Gardner,38
+306,Hal Jordan,69
+307,Han Solo,50
+308,Hancock,63
+309,Harley Quinn,88
+310,Harry Potter,75
+311,Havok,63
+312,Hawk,38
+313,Hawkeye,56
+314,Hawkeye II,50
+315,Hawkgirl,50
+320,Heat Wave,38
+321,Hela,63
+322,Hellboy,63
+323,Hellcat,63
+325,Hercules,63
+327,Hit-Girl,56
+330,Hope Summers,63
+332,Hulk,88
+333,Human Torch,63
+334,Huntress,69
+335,Husk,63
+336,Hybrid,63
+337,Hydro-Man,38
+338,Hyperion,88
+339,Iceman,63
+340,Impulse,50
+341,Indiana Jones,69
+342,Indigo,75
+343,Ink,38
+344,Invisible Woman,88
+345,Iron Fist,75
+346,Iron Man,100
+347,Iron Monger,88
+348,Isis,75
+350,Jack of Hearts,63
+351,Jack-Jack,6
+352,James Bond,88
+353,James T. Kirk,69
+354,Jar Jar Binks,10
+355,Jason Bourne,88
+356,Jean Grey,94
+357,Jean-Luc Picard,75
+358,Jennifer Kale,75
+360,Jessica Cruz,56
+361,Jessica Jones,56
+364,Jim Powell,38
+365,JJ Powell,88
+367,John Constantine,63
+369,John Wraith,75
+370,Joker,100
+371,Jolt,63
+372,Jubilee,56
+373,Judge Dredd,75
+374,Juggernaut,44
+375,Junkpile,50
+376,Justice,50
+379,Kang,100
+380,Kathryn Janeway,75
+381,Katniss Everdeen,56
+382,Kevin 11,25
+383,Kick-Ass,38
+384,Kid Flash,25
+386,Killer Croc,19
+387,Killer Frost,88
+388,Kilowog,81
+389,King Kong,56
+390,King Shark,50
+391,Kingpin,75
+392,Klaw,63
+393,Kool-Aid Man,25
+394,Kraven II,50
+395,Kraven the Hunter,63
+396,Krypto,9
+397,Kyle Rayner,69
+398,Kylo Ren,56
+400,Lady Deathstrike,63
+401,Leader,100
+402,Leech,25
+403,Legion,50
+404,Leonardo,75
+405,Lex Luthor,100
+406,Light Lass,38
+407,Lightning Lad,38
+408,Lightning Lord,44
+409,Living Brain,75
+410,Living Tribunal,100
+412,Lizard,50
+413,Lobo,94
+414,Loki,88
+415,Longshot,50
+416,Luke Cage,50
+418,Luke Skywalker,69
+419,Luna,38
+421,Mach-IV,75
+422,Machine Man,63
+423,Magneto,88
+424,Magog,50
+425,Magus,88
+426,Man of Miracles,100
+427,Man-Bat,38
+428,Man-Thing,50
+429,Man-Wolf,63
+430,Mandarin,100
+431,Mantis,63
+432,Martian Manhunter,100
+433,Marvel Girl,63
+435,Master Chief,75
+436,Match,75
+437,Matt Parkman,63
+438,Maverick,63
+439,Maxima,75
+440,Maya Herrera,50
+441,Medusa,75
+442,Meltdown,38
+443,Mephisto,88
+444,Mera,56
+445,Metallo,75
+448,Metron,88
+449,Micah Sanders,63
+450,Michelangelo,63
+451,Micro Lad,38
+452,Mimic,63
+454,Misfit,63
+455,Miss Martian,63
+456,Mister Fantastic,100
+457,Mister Freeze,75
+458,Mister Knife,75
+459,Mister Mxyzptlk,100
+460,Mister Sinister,100
+461,Mister Zsasz,88
+462,Mockingbird,75
+463,MODOK,100
+467,Molten Man,50
+469,Monica Dawson,50
+470,Moon Knight,50
+471,Moonstone,56
+472,Morlun,63
+474,Moses Magnum,75
+475,Mr Immortal,50
+476,Mr Incredible,50
+477,Ms Marvel II,38
+478,Multiple Man,63
+479,Mysterio,81
+480,Mystique,75
+481,Namor,69
+483,Namora,50
+484,Namorita,50
+485,Naruto Uzumaki,50
+487,Nebula,63
+488,Negasonic Teenage Warhead,50
+489,Nick Fury,75
+490,Nightcrawler,50
+491,Nightwing,88
+492,Niki Sanders,63
+493,Nina Theroux,63
+495,Northstar,50
+496,Nova,100
+497,Nova,63
+498,Odin,100
+499,Offspring,50
+502,One Punch Man,38
+503,One-Above-All,100
+504,Onslaught,88
+505,Oracle,75
+506,Osiris,75
+508,Ozymandias,100
+509,Parademon,9
+510,Paul Blart,8
+514,Penguin,75
+516,Phantom Girl,38
+517,Phoenix,100
+518,Plantman,63
+520,Plastic Man,50
+521,Plastique,50
+522,Poison Ivy,81
+523,Polaris,63
+524,Power Girl,94
+526,Predator,63
+527,Professor X,100
+528,Professor Zoom,94
+529,Psylocke,63
+530,Punisher,69
+531,Purple Man,56
+532,Pyro,38
+533,Q,100
+535,Question,81
+536,Quicksilver,63
+537,Quill,38
+538,Ra's Al Ghul,100
+539,Rachel Pirzad,63
+540,Rambo,63
+541,Raphael,63
+542,Raven,50
+543,Ray,50
+545,Red Arrow,63
+546,Red Hood,75
+547,Red Hulk,50
+548,Red Mist,25
+549,Red Robin,81
+550,Red Skull,75
+551,Red Tornado,75
+555,Rey,63
+556,Rhino,25
+557,Rick Flag,88
+558,Riddler,100
+559,Rip Hunter,100
+561,Robin,88
+562,Robin II,75
+563,Robin III,81
+564,Robin V,69
+565,Robin VI,50
+566,Rocket Raccoon,50
+567,Rogue,75
+568,Ronin,56
+569,Rorschach,75
+570,Sabretooth,56
+571,Sage,75
+572,Sandman,44
+573,Sasquatch,75
+574,Sauron,88
+575,Savage Dragon,63
+576,Scarecrow,81
+577,Scarlet Spider,75
+578,Scarlet Spider II,88
+579,Scarlet Witch,100
+580,Scorpia,38
+581,Scorpion,50
+582,Sebastian Shaw,63
+583,Sentry,75
+584,Shadow King,75
+585,Shadow Lass,63
+586,Shadowcat,88
+587,Shang-Chi,63
+588,Shatterstar,63
+589,She-Hulk,81
+590,She-Thing,69
+591,Shocker,63
+592,Shriek,50
+594,Sif,63
+595,Silk,75
+598,Silver Surfer,56
+599,Silverclaw,50
+600,Simon Baz,56
+601,Sinestro,75
+602,Siren,56
+604,Siryn,38
+605,Skaar,50
+607,Snowbird,50
+608,Sobek,50
+609,Solomon Grundy,9
+610,Songbird,75
+611,Space Ghost,38
+612,Spawn,75
+613,Spectre,88
+615,Speedy,50
+618,Spider-Girl,63
+619,Spider-Gwen,75
+620,Spider-Man,90
+623,Spider-Woman,56
+625,Spider-Woman III,50
+627,Spock,81
+628,Spyke,50
+630,Star-Lord,69
+631,Stardust,88
+632,Starfire,50
+633,Stargirl,63
+634,Static,69
+635,Steel,81
+636,Stephanie Powell,69
+637,Steppenwolf,94
+638,Storm,75
+639,Stormtrooper,10
+640,Sunspot,63
+641,Superboy,75
+642,Superboy-Prime,94
+643,Supergirl,94
+644,Superman,94
+645,Swamp Thing,88
+646,Swarm,75
+647,Sylar,75
+648,Synch,75
+649,T-1000,75
+650,T-800,75
+651,T-850,75
+652,T-X,75
+653,Taskmaster,75
+654,Tempest,38
+655,Thanos,100
+656,The Cape,38
+657,The Comedian,63
+658,Thing,75
+659,Thor,69
+660,Thor Girl,75
+661,Thunderbird,50
+664,Thunderstrike,63
+665,Thundra,38
+666,Tiger Shark,38
+667,Tigra,63
+668,Tinkerer,100
+670,Toad,50
+671,Toxin,56
+672,Toxin,75
+676,Triplicate Girl,63
+677,Triton,56
+678,Two-Face,88
+679,Ultragirl,50
+680,Ultron,88
+681,Utgard-Loki,50
+685,Vanisher,63
+686,Vegeta,81
+687,Venom,75
+688,Venom II,50
+689,Venom III,63
+690,Venompool,69
+692,Vibe,50
+693,Vindicator,63
+696,Violet Parr,56
+697,Vision,100
+699,Vixen,50
+701,Vulture,75
+702,Walrus,50
+703,War Machine,63
+705,Warlock,88
+706,Warp,38
+707,Warpath,38
+708,Wasp,63
+709,Watcher,100
+711,White Canary,63
+713,Wildfire,50
+714,Winter Soldier,56
+716,Wolfsbane,38
+717,Wolverine,63
+718,Wonder Girl,75
+719,Wonder Man,75
+720,Wonder Woman,88
+722,Wyatt Wingfoot,10
+723,X-23,75
+724,X-Man,88
+726,Yellowjacket,88
+727,Yellowjacket II,50
+728,Ymir,50
+729,Yoda,88
+730,Zatanna,81
+731,Zoom,50

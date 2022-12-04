@@ -1,6 +1,5 @@
 # QueriesMongo 
-1. ¿Quienes son más inteligentes los superhéroes o villanos?
-
+**1. ¿Quienes son más inteligentes los superhéroes o villanos?**
 Agregamos un campo a la base de datos CharacterType dependiendo de su alignment: 
 ```
 db.superheroes.updateMany({},[{$addFields:{CharacterType:{$cond: {if:{$in:["$biography.alignment",["good"]]},then: "superhero", else: {$cond: {if:{$in:["$biography.alignment", ["bad"]]},then:"Villain",else:"Neutral"}}}}}}])
@@ -17,13 +16,13 @@ Respuesta: Villanos
   { _id: 'superhero', Avgintelligence: 62.776566757493185 }
 ]
 ```
-2. ¿Cuál es la distribución de los personajes por publisher?
+**2. ¿Cuál es la distribución de los personajes por publisher?**
 
 ```
 db.superheroes.aggregate({$group: {_id: "$biography.publisher", Numberofcharacters: {$sum:1}}})
 ```
 
-Respuesta: 
+**Respuesta:**
 ```
 [
   { _id: 'Black Racer', Numberofcharacters: 1 },
@@ -48,4 +47,26 @@ Respuesta:
   { _id: 'Marvel Comics', Numberofcharacters: 269 }
 ]
 ```
+
+**3. ¿Cuál es la distribución de villanos, superheroes o neutrales por género?**
+```
+db.superheroes.aggregate({$group:{_id:{CharacterType:"$CharacterType", Gender:"$appearance.gender"}, Count:{$sum:1}}})
+```
+
+**Respuesta:** 
+
+```
+[
+  { _id: { CharacterType: 'superhero', Gender: '-' }, Count: 8 },
+  { _id: { CharacterType: 'Villain', Gender: 'Male' }, Count: 134 },
+  { _id: { CharacterType: 'Villain', Gender: 'Female' }, Count: 28 },
+  { _id: { CharacterType: 'Villain', Gender: '-' }, Count: 4 },
+  { _id: { CharacterType: 'Neutral', Gender: 'Male' }, Count: 23 },
+  { _id: { CharacterType: 'Neutral', Gender: '-' }, Count: 3 },
+  { _id: { CharacterType: 'superhero', Gender: 'Male' }, Count: 239 },
+  { _id: { CharacterType: 'Neutral', Gender: 'Female' }, Count: 4 },
+  { _id: { CharacterType: 'superhero', Gender: 'Female' }, Count: 120 }
+]
+```
+
 

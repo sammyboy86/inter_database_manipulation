@@ -1,14 +1,4 @@
 # QueriesMongo 
-
-Primero convertimos todos los campos con strings separados por comas en arrays: 
-```
-db.superheroes.updateMany({},[{$addFields:{"connections.groupAffiliation": { "$split": [ "$connections.groupAffiliation", "," ]}}}])
-db.superheroes.updateMany({},[{$addFields:{"connections.relatives": { "$split": [ "$connections.relatives", "," ]}}}])
-db.superheroes.updateMany({},[{$addFields:{"work.occupation": { "$split": [ "$work.occupation", "," ]}}}])
-db.superheroes.updateMany({},[{$addFields:{"work.base": { "$split": [ "$work.base", "," ]}}}])
-```
-
-
 1. ¿Quienes son más inteligentes los superhéroes o villanos?
 
 Agregamos un campo a la base de datos CharacterType dependiendo de su alignment: 
@@ -25,6 +15,37 @@ Respuesta: Villanos
   { _id: 'Villain', Avgintelligence: 68.04819277108433 },
   { _id: 'Neutral', Avgintelligence: 65.93333333333334 },
   { _id: 'superhero', Avgintelligence: 62.776566757493185 }
+]
+```
+2. ¿Cuál es la distribución de los personajes por publisher?
+
+```
+db.superheroes.aggregate({$group: {_id: "$biography.publisher", Numberofcharacters: {$sum:1}}})
+```
+
+Respuesta: 
+```
+[
+  { _id: 'Black Racer', Numberofcharacters: 1 },
+  { _id: 'Power Man', Numberofcharacters: 1 },
+  { _id: 'Impulse', Numberofcharacters: 1 },
+  { _id: 'Phoenix', Numberofcharacters: 1 },
+  { _id: 'Superman Prime One-Million', Numberofcharacters: 1 },
+  { _id: 'George Lucas', Numberofcharacters: 12 },
+  { _id: 'Dark Horse Comics', Numberofcharacters: 15 },
+  { _id: null, Numberofcharacters: 6 },
+  { _id: 'Rebellion', Numberofcharacters: 1 },
+  { _id: 'Ms Marvel II', Numberofcharacters: 1 },
+  { _id: 'Scorpion', Numberofcharacters: 1 },
+  { _id: 'Gemini V', Numberofcharacters: 1 },
+  { _id: 'Batman II', Numberofcharacters: 2 },
+  { _id: 'Universal Studios', Numberofcharacters: 1 },
+  { _id: 'Image Comics', Numberofcharacters: 3 },
+  { _id: 'Anti-Venom', Numberofcharacters: 2 },
+  { _id: 'South Park', Numberofcharacters: 1 },
+  { _id: 'DC Comics', Numberofcharacters: 155 },
+  { _id: 'Batgirl V', Numberofcharacters: 1 },
+  { _id: 'Marvel Comics', Numberofcharacters: 269 }
 ]
 ```
 

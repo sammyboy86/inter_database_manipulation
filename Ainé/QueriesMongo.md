@@ -49,7 +49,7 @@ db.superheroes.aggregate({$group: {_id: "$biography.publisher", Numberofcharacte
 ]
 ```
 
-**3. ¿Cuál es la distribución de villanos, superheroes o neutrales por género?**
+**3. ¿Cuál es la distribución de villanos, superhéroes o neutrales por género?**
 ```
 db.superheroes.aggregate({$group:{_id:{CharacterType:"$CharacterType", Gender:"$appearance.gender"}, Count:{$sum:1}}})
 ```

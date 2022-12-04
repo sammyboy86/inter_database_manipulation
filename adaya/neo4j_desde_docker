@@ -1,3 +1,4 @@
+#esto es para crear el contenedor y los volumenes que necesita neo4j
 docker pull neo4j
 docker run \
     --name testneo4j \
@@ -9,4 +10,8 @@ docker run \
     -v $HOME/neo4j/plugins:/plugins \
     --env NEO4J_AUTH=neo4j/test \
     neo4j:latest
+ 
 #ya después entras desde el navegador a "http://localhost:7474/browser/" y estás en neo4j
+
+#luego tenemos que subir el archivo que queremos importar a la carpeta de imports en el contenedor y dirección correcta
+sudo docker cp n4jLimpio.csv testneo4j:/var/lib/neo4j/import

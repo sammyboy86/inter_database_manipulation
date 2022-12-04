@@ -1,5 +1,6 @@
 # QueriesMongo 
 **1. ¿Quienes son más inteligentes los superhéroes o villanos?**
+
 Agregamos un campo a la base de datos CharacterType dependiendo de su alignment: 
 ```
 db.superheroes.updateMany({},[{$addFields:{CharacterType:{$cond: {if:{$in:["$biography.alignment",["good"]]},then: "superhero", else: {$cond: {if:{$in:["$biography.alignment", ["bad"]]},then:"Villain",else:"Neutral"}}}}}}])

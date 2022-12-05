@@ -1,0 +1,9 @@
+
+#aqui sacamos de lo que estaba en mongo a un csv (que se queda en el contenedor) 
+docker exec -i $DHC mongo mongoexport --host localhost --db shapi --collection superheroes --type=csv --out idean4j.csv --fields "name","slug",
+"appearance.gender","appearance.race","biography.publisher","biography.placeOfBirth","biography.alignment","work.base","connections.groupAffiliation",
+"connections.relatives"
+
+#aqui saco del contenedor el archivo y lo mando a uno que pueda acceder más fácilmente desde python
+docker exec -i $DHC mongo cat idean4j.csv > idean4jafuera.csv
+

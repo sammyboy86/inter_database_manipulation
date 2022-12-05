@@ -1,0 +1,21 @@
+create table supers (
+  name  VARCHAR(80),
+  slug  VARCHAR(80),
+  intelligence  VARCHAR(80),
+  strength  VARCHAR(80),
+  speed  VARCHAR(80),
+  durability  VARCHAR(80),
+  power  VARCHAR(80),
+  combat  VARCHAR(80),
+  height  VARCHAR(80),
+  weight  VARCHAR(80),
+  eyeColor  VARCHAR(80),
+  hairColor  VARCHAR(80),
+  gender  VARCHAR(80),
+  race  VARCHAR(80),
+  occupation  VARCHAR(80),
+  fullName  VARCHAR(80),
+  alterEgos  VARCHAR(80),
+  firstAppearance  VARCHAR(80),
+  aliases  VARCHAR(80)
+);

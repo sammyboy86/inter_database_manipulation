@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+
+data=pd.read_csv('../idean4jafuera.csv')  
+#estas son las columnas que queremos modificar
+porMod=['biography.placeOfBirth','connections.groupAffiliation','connections.relatives']
+#cambiamos todas las comas de cada columna obtenida por "-",
+#cada columna va en un arreglo y eso dentro de otro arreglo llamado results
+results=[]
+for j in porMod:    
+    col=data[j]
+    resAux=[]
+    for i in col:
+        resAux.append(str(i).replace(",", "-" )) 
+    results.append(resAux)
+
+#cambiamos columnas viejas por nuevas
+dataAux=data
+cont=0
+for h in porMod:    
+    dataAux[h] = results[cont]
+    cont=cont+1
+
+
+#lo pasamos a un csv
+dataAux.to_csv('../n4jLimpio.csv',header=True,index=False)

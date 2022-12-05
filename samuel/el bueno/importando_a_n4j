@@ -1,0 +1,36 @@
+//primero hacemos el copy como vimos con skalas
+LOAD CSV  WITH HEADERS FROM "file:///n4jLimpio.csv"
+AS row
+CREATE (n:superhero)
+SET n = row,
+n.name = toString(row.name), n.slug = toString(row.slug), n.gender = toString(row.appearance.gender),
+n.race = toString(row.appearance.race), n.publisher = toString(row.biography.publisher), n.placeOfBirth = toString(row.biography.placeOfBirth),
+n.alignment = toString(row.biography.alignment), n.base= toString(row.work.base), n.groups = toString(row.connections.groupAffiliation),
+n.relatives = toString(row.connections.relatives)
+
+//luego creamos los edges (son los que consideré buena idea, no son permanentes)
+
+//misma especie
+MATCH (n:superhero),(c:superhero)
+WHERE n.race = c.race
+CREATE (p)-[:same_race]->(c)
+
+//buenos o malos
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.alignment` = c.`biography.alignment`
+CREATE (n)-[:alignment]->(c)
+
+//publisher
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.publisher` = c.`biography.publisher`
+CREATE (n)-[:publisher]->(c)
+
+//lugar de nacimiento
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.placeOfBirth` = c.`biography.placeOfBirth`
+CREATE (n)-[:place_of_birth]->(c)
+
+//ciudad donde operan
+MATCH (n:superhero),(c:superhero)
+WHERE n.`work.base` = c.`work.base`
+CREATE (n)-[:work_base]->(c)

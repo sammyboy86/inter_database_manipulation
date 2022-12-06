@@ -72,7 +72,7 @@ db.superheroes.aggregate({$group:{_id:{CharacterType:"$CharacterType", Gender:"$
 _____________________________________________________________________________________
 * Monet queries:
 
-** --Top 10 promedios de inteligencia por raza
+** 1. Top 10 promedios de inteligencia por raza
 
 #+begin_src sql
 select "race", avg(intelligence) as intel
@@ -82,7 +82,7 @@ order by intel desc
 limit 10;
 #+end_src
 
-** --Nombres de los 15 personajes más rapidos con género
+** 2. Nombres de los 15 personajes más rapidos con género
 #+begin_src sql
 select "name",gender, speed as vel
 from supers
@@ -90,7 +90,7 @@ order by vel desc
 limit 15;
 #+end_src
 
-** --Promedio de poder en personajes agrupados por color de ojos
+** 3. Promedio de poder en personajes agrupados por color de ojos
 #+begin_src sql
 select eyecolor,avg(power) as poder
 from supers
@@ -101,19 +101,19 @@ limit 10;
 _____________________________________________________________________________________
 * Neo4j queries:
 
-** --Distribución razas por grupo afiliado
+** 1. Distribución razas por grupo afiliado
 #+begin_src cypher
 match (n:superhero)
 return n.`connections.groupAffiliation`, count(distinct n.`appearance.race`) as conteo;
 #+end_src
 
-** --Las razas menos comunes por grupo de parientes 
+** 2. Las razas menos comunes por grupo de parientes 
 #+begin_src cypher
 match (n:superhero)
 return n.`appearance.race`, count(distinct n.`connections.relatives`) as conteo
 order by conteo asc limit 5;
 #+end_src
-** --Distribución de género por lugar de nacimiento
+** 3. Distribución de género por lugar de nacimiento
 #+begin_src cypher
 match(n:superhero)
 return n.`connections.relatives`, count(n.`appearance.gender`) as conteo;

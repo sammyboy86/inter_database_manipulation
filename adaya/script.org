@@ -1,8 +1,31 @@
-# Cómo correr nuestro proyecto
-## Empecemos con lo de las apis
+* Cómo correr nuestro proyecto
+** Empecemos con lo de las apis
 
-Usamos una api de superheroes que tienen sus características, por quiénes fueron publicados, sus ciudades, etc. Lo padre es que no son de los mismos universos y eso nos da más posiblidades de análisis.
-Aquí es necesario que ejecutemos el siguiente código de python.
+Usamos una api de superheroes que tienen sus características, por quiénes fueron publicados, sus ciudades, etc. Lo padre es que no son de los mismos universos y eso nos da más posiblidades de análisis. 
+
+~Primero prendemos nuestro mongo:~
+#+begin_src bash
+docker stop mongo 
+docker rm mongo 
+# cd carpeta de sus datos
+export DATA_DIR=`pwd`/data 
+echo $DATA_DIR 
+export EX_DIR=`pwd`/mongodb-sample-dataset
+echo $EX_DIR
+mkdir -p $DATA_DIR 
+docker run -p 27017:27017 \
+       -v $DATA_DIR:/data/db \
+       -v $EX_DIR:/mongodb-sample-dataset \
+       --name mongo \
+       -d mongo
+export DHC=$(docker ps -aqf "name=mongo")
+sleep 2
+docker exec -it $DHC mongosh
+#+end_src
+
+Después metemos en nuestra base shapi la colección superheroes.
+
+~Aquí es necesario que ejecutemos el siguiente código de python:~ 
 
 #+begin_src py
   #API de superheroes de muchos universos 
@@ -33,3 +56,234 @@ Aquí es necesario que ejecutemos el siguiente código de python.
 
   col.insert_many(lista)
 #+end_src
+
+** Pasemos a los mongoexports
+Ya que los tenemos en el mongo, vamos a exportarlos a csv para poder meterlos a neo4j y a Monet.
+
+~Sobre la terminal, ejecutamos:~
+#+begin_src bash
+#este nos da el archivo para meter a monet
+docker exec -i $DHC mongo mongoexport --host localhost --db shapi --collection superheroes --type=csv --out ideaMonet.csv --fields name,slug,powerstats.intelligence,powerstats.strength,powerstats.speed,powerstats.durability,powerstats.power,powerstats.combat,appearance.height,appearance.weight,appearance.eyeColor,appearance.hairColor,appearance.gender,appearance.race,work.occupation,biography.fullName,biography.alterEgos,biography.firstAppearance,biography.aliases
+
+#este nos da el archivo para meter a neo4j
+docker exec -i $DHC mongo mongoexport --host localhost --db shapi --collection superheroes --type=csv --out idean4j.csv --fields "name","slug",
+"appearance.gender","appearance.race","biography.publisher","biography.placeOfBirth","biography.alignment","work.base","connections.groupAffiliation",
+"connections.relatives"
+
+#ya que estamos en estas, vamos a sacar los documentos del contenedor para poder usarlos
+docker exec -i $DHC mongo cat idean4j.csv > idean4jafuera.csv
+docker exec -i $DHC mongo cat ideaMonet.csv > ideamonetafuera.csv
+
+#+end_src
+
+** Ahora, vamos a limpiar los csv para poder meterlos sin conflictos por las comas extra con estos codigos de python.
+*** primer archivo: idean4jafuera.csv
+~ejecutamos en python:~
+#+begin_src py
+import pandas as pd
+import numpy as np
+
+data=pd.read_csv('../idean4jafuera.csv')  
+#estas son las columnas que queremos modificar
+porMod=['biography.placeOfBirth','connections.groupAffiliation','connections.relatives']
+#cambiamos todas las comas de cada columna obtenida por "-",
+#cada columna va en un arreglo y eso dentro de otro arreglo llamado results
+results=[]
+for j in porMod:    
+    col=data[j]
+    resAux=[]
+    for i in col:
+        resAux.append(str(i).replace(",", "-" )) 
+    results.append(resAux)
+
+#cambiamos columnas viejas por nuevas
+dataAux=data
+cont=0
+for h in porMod:    
+    dataAux[h] = results[cont]
+    cont=cont+1
+
+
+#lo pasamos a un csv
+dataAux.to_csv('../n4jLimpio.csv',header=True,index=False)
+#+end_src
+
+*** segundo archivo: ideamonetafuera.csv
+#+begin_src py
+import pandas as pd
+import numpy as np
+
+data=pd.read_csv('ideamonetafuera.csv')  
+
+#estas son las columnas que queremos modificar
+porMod=['appearance.height','appearance.weight','work.occupation','biography.fullName','biography.alterEgos','biography.firstAppearance','biography.aliases']
+
+#cambiamos todas las comas de cada columna obtenida por "-",
+#cada columna va en un arreglo y eso dentro de otro arreglo llamado results
+results=[]
+for j in porMod:    
+    col=data[j]
+    resAux=[]
+    for i in col:
+        resAux.append(str(i).replace(",", "-" )) 
+    results.append(resAux)
+
+#cambiamos columnas viejas por nuevas
+dataAux=data
+cont=0
+for h in porMod:    
+    dataAux[h] = results[cont]
+    cont=cont+1
+
+
+#lo pasamos a un csv
+dataAux.to_csv('../supsLimpioMonet.csv',header=True,index=False)
+#+end_src
+
+** Ahora sí, los inserts
+*** Empecemos por n4j
+
+~En la terminal, ejecutamos para prender nuestro n4j desde docker:~
+#+begin_src bash
+#esto es para crear el contenedor y los volumenes que necesita neo4j
+docker pull neo4j
+docker run \
+    --name testneo4j \
+    -p7474:7474 -p7687:7687 \
+    -d \
+    -v $HOME/neo4j/data:/data \
+    -v $HOME/neo4j/logs:/logs \
+    -v $HOME/neo4j/import:/var/lib/neo4j/import \
+    -v $HOME/neo4j/plugins:/plugins \
+    --env NEO4J_AUTH=neo4j/test \
+    neo4j:latest
+    
+#copiamos nuestro archivo a la carpeta donde debe estar para poder importar a neo4j
+sudo docker cp n4jLimpio.csv testneo4j:/var/lib/neo4j/import
+#+end_src
+
+Para entrar en neo4j, entramos a "http://localhost:7474/browser/" y listo.
+
+** Para la siguiente parte, todo es dentro de n4j
+
+#+begin_src cypher
+//primero hacemos el copy como vimos con skalas
+LOAD CSV  WITH HEADERS FROM "file:///n4jLimpio.csv"
+AS row
+CREATE (n:superhero)
+SET n = row,
+n.name = toString(row.name), n.slug = toString(row.slug), n.gender = toString(row.appearance.gender),
+n.race = toString(row.appearance.race), n.publisher = toString(row.biography.publisher), n.placeOfBirth = toString(row.biography.placeOfBirth),
+n.alignment = toString(row.biography.alignment), n.base= toString(row.work.base), n.groups = toString(row.connections.groupAffiliation),
+n.relatives = toString(row.connections.relatives)
+
+//luego creamos los edges
+
+//misma especie
+MATCH (n:superhero),(c:superhero)
+WHERE n.race = c.race
+CREATE (p)-[:same_race]->(c)
+
+//buenos o malos
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.alignment` = c.`biography.alignment`
+CREATE (n)-[:alignment]->(c)
+
+//publisher
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.publisher` = c.`biography.publisher`
+CREATE (n)-[:publisher]->(c)
+
+//lugar de nacimiento
+MATCH (n:superhero),(c:superhero)
+WHERE n.`biography.placeOfBirth` = c.`biography.placeOfBirth`
+CREATE (n)-[:place_of_birth]->(c)
+
+//ciudad donde operan
+MATCH (n:superhero),(c:superhero)
+WHERE n.`work.base` = c.`work.base`
+CREATE (n)-[:work_base]->(c)
+
+#+end_src
+
+** Luego, insertemos en Monetdb
+
+~Sobre la terminal, ejecutamos:~
+#+begin_src bash
+#bajamos monetdb y lo corremos en contenedor llamado monetdb
+docker volume create monet-data
+docker stop monetdb
+docker rm monetdb
+docker run \
+       -v monet-data:/var/monetdb5/dbfarm \
+       -p 50001:50000 \
+       --name monetdb \
+       -d monetdb/monetdb:latest
+
+#aqui entramos a la terminal de monet
+docker exec -it monetdb /bin/bash
+#+end_src
+
+~Ya dentro de la terminal de monet ejecutamos:~
+#+begin_src bash
+#creamos base de datos llamada superhero
+monetdb create -p monetdb superhero
+
+#entramos a la base de datos a través de mclient
+mclient -u monetdb -d superhero
+# password: "monetdb"
+
+#creamos usuario y schema ya dentro la base de datos
+CREATE USER "superhero" WITH PASSWORD 'superhero' NAME 'superhero' SCHEMA "sys";
+CREATE SCHEMA "superhero" AUTHORIZATION "superhero";
+ALTER USER "superhero" SET SCHEMA "superhero";
+
+#nos salimos de la base de datos
+#y reconectamos desde monetdb pero ahora con usuario
+#superhero y contraseña superhero
+mclient -u superhero -d superhero
+
+#dentro de la base ahora creamos la siguiente tabla llamda supers
+create table supers (
+  name  VARCHAR(500),
+  slug  VARCHAR(500),
+  intelligence  VARCHAR(500),
+  strength  VARCHAR(500),
+  speed  VARCHAR(500),
+  durability  VARCHAR(500),
+  power  VARCHAR(500),
+  combat  VARCHAR(500),
+  height  VARCHAR(500),
+  weight  VARCHAR(500),
+  eyeColor  VARCHAR(500),
+  hairColor  VARCHAR(500),
+  gender  VARCHAR(500),
+  race  VARCHAR(500),
+  occupation  VARCHAR(500),
+  fullName  VARCHAR(500),
+  alterEgos  VARCHAR(500),
+  firstAppearance  VARCHAR(500),
+  aliases  VARCHAR(500)
+);
+#+end_src
+
+~De regreso a la terminal de bash, ejecutamos:~
+
+#+begin_src bash
+#antes de copiar la info a tu tabla
+#es importante revisar que si tengas el archivo dentro del alcance de tu docker
+#si no lo tienes al alcance corre la siguiente linea
+docker cp dataMonet.csv monetdb:/
+
+#nos volvemos a meter a monet
+mclient -u superhero -d superhero
+
+#ya con el archivo a tu alcance corre la siguiente linea para meterlo a tu tabla
+#desde la base de datos
+copy offset 2 into supers from '/supsLimpio.csv' on client using delimiters ',',E'\n',E'\"' null as ' ';
+
+#si todo sale bien la siguiente linea te deberia imprimir
+#los primeros 20 supers de la tabla :D
+select * from supers limit 20;
+#+end_src
+

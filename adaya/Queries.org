@@ -1,29 +1,33 @@
-_____________________________________________________________________________________
-Mongo queries:
 
-1. ¿Quienes son más inteligentes los superhéroes o villanos?
+* Mongo queries:
+
+** 1. ¿Quienes son más inteligentes los superhéroes o villanos?
 
 Agregamos un campo a la base de datos CharacterType dependiendo de su alignment:
-
+#+begin_src javascript
 db.superheroes.updateMany({},[{$addFields:{CharacterType:{$cond: {if:{$in:["$biography.alignment",["good"]]},then: "superhero", else: {$cond: {if:{$in:["$biography.alignment", ["bad"]]},then:"Villain",else:"Neutral"}}}}}}])
+#+end_src
 
 Luego agrupamos y sacamos el promedio de cada uno de los grupos:
 
+#+begin_src javascript
 db.superheroes.aggregate({$group: {_id: "$CharacterType", Avgintelligence: {$avg: "$powerstats.intelligence"}}})
+#+end_src
 
 Respuesta: Villanos
-
+#+begin_src javascript
 [
   { _id: 'Villain', Avgintelligence: 68.04819277108433 },
   { _id: 'Neutral', Avgintelligence: 65.93333333333334 },
   { _id: 'superhero', Avgintelligence: 62.776566757493185 }
 ]
+#+end_src
 
-2. ¿Cuál es la distribución de los personajes por publisher?
-
+** 2. ¿Cuál es la distribución de los personajes por publisher?
+#+begin_src javascript
 db.superheroes.aggregate({$group: {_id: "$biography.publisher", Numberofcharacters: {$sum:1}}})
 
-Respuesta:
+//Respuesta:
 
 [
   { _id: 'Black Racer', Numberofcharacters: 1 },
@@ -47,9 +51,10 @@ Respuesta:
   { _id: 'Batgirl V', Numberofcharacters: 1 },
   { _id: 'Marvel Comics', Numberofcharacters: 269 }
 ]
+#+end_src
 
-3. ¿Cuál es la distribución de villanos, superhéroes o neutrales por género?
-
+** 3. ¿Cuál es la distribución de villanos, superhéroes o neutrales por género?
+#+begin_src javascript
 db.superheroes.aggregate({$group:{_id:{CharacterType:"$CharacterType", Gender:"$appearance.gender"}, Count:{$sum:1}}})
 
 [
@@ -63,44 +68,53 @@ db.superheroes.aggregate({$group:{_id:{CharacterType:"$CharacterType", Gender:"$
   { _id: { CharacterType: 'Neutral', Gender: 'Female' }, Count: 4 },
   { _id: { CharacterType: 'superhero', Gender: 'Female' }, Count: 120 }
 ]
-
+#+end_src
 _____________________________________________________________________________________
-Monet queries:
+* Monet queries:
 
---top 10 promedios de inteligencia por raza
+** --Top 10 promedios de inteligencia por raza
+
+#+begin_src sql
 select "race", avg(intelligence) as intel
 from supers
 group by "race"
 order by intel desc
 limit 10;
+#+end_src
 
---nombres de los 15 personajes más rapidos con género
+** --Nombres de los 15 personajes más rapidos con género
+#+begin_src sql
 select "name",gender, speed as vel
 from supers
 order by vel desc
 limit 15;
+#+end_src
 
---promedio de poder en personajes agrupados por color de ojos
+** --Promedio de poder en personajes agrupados por color de ojos
+#+begin_src sql
 select eyecolor,avg(power) as poder
 from supers
 group by eyecolor
 order by poder desc
 limit 10;
-
+#+end_src
 _____________________________________________________________________________________
-Neo4j queries:
+* Neo4j queries:
 
---distribución razas por grupo afiliado
-
+** --Distribución razas por grupo afiliado
+#+begin_src cypher
 match (n:superhero)
 return n.`connections.groupAffiliation`, count(distinct n.`appearance.race`) as conteo;
+#+end_src
 
---las razas menos comunes por grupo de parientes 
-
+** --Las razas menos comunes por grupo de parientes 
+#+begin_src cypher
 match (n:superhero)
 return n.`appearance.race`, count(distinct n.`connections.relatives`) as conteo
 order by conteo asc limit 5;
-
---distribución de género por lugar de nacimiento
+#+end_src
+** --Distribución de género por lugar de nacimiento
+#+begin_src cypher
 match(n:superhero)
 return n.`connections.relatives`, count(n.`appearance.gender`) as conteo;
+#+end_src

@@ -76,7 +76,12 @@ docker exec -i $DHC mongo cat ideaMonet.csv > ideamonetafuera.csv
 
 #+end_src
 
-** Ahora, vamos a limpiar los csv para poder meterlos sin conflictos por las comas extra con estos codigos de python.
+**** Antes de continuar, es momento de explicar cómo decidimos partir nuestra base de datos original para el ETL.
+Para Monetdb, decidimos llevarnos más sobre las características de los superheroes que son más necesarias para análisis comparativo, como su apariencia, biografía, velocidad, durabilidad, poder de combate, etc.
+
+Para N4Jdb, decidimos llevarnos las cosas que generan relaciones entre los superheroes de cada universo, como su especie, la ciudad que salvan, sus conexiones familiares, si son buenos o malos, etc.
+
+** Ahora, vamos a limpiar los csv para poder meterlos sin conflictos por las comas extra con estos codigos de python
 *** primer archivo: idean4jafuera.csv
 ~ejecutamos en python:~
 #+begin_src py

@@ -1,5 +1,5 @@
 # proyecto_BD_NR
- Proyecto final para bases de datos no relacionales
+ Inter-database manipulation project
 
 ## ¿Qué fue lo que hicimos?
 Tenemos carpetas individuales en donde fuimos trabajando poco a poco en el proyecto durante nuestras reuniones, sin embargo, la totalidad del proyecto y el instructivo paso por paso para subir todas las bases se encuentran en el _scriptCodigo.org_ que se encuentra en el main del repositorio.
